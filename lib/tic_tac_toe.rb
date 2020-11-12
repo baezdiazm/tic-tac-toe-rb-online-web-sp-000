@@ -20,7 +20,6 @@ end
 
 def input_to_index(input)
   input.to_i - 1
-=======
 #display_board(board)
 
 def input_to_index(user_input)
@@ -32,7 +31,6 @@ def move(board, index, current_player)
   board[index] = current_player
 end
 
-<<<<<<< HEAD
 def position_taken?(board, position)
   board[position] != "" && board[position] != " "
 end
@@ -49,7 +47,6 @@ def turn_count(board)
     end
   end
   a
-=======
 
 
 
@@ -84,7 +81,6 @@ def turn_count(arr)
     end
     end
     counter
->>>>>>> 61277ec74bab337f16ace1efc39fba4504117aca
 end
 
 
@@ -96,7 +92,6 @@ def current_player(arr)
   end
 end
 
-<<<<<<< HEAD
 def full?(board)
   !board.include? " "
 end
@@ -104,7 +99,7 @@ end
 def won?(board)
   WIN_COMBINATIONS.each do |win_combination|
     if (board[win_combination[0]] == "X" && board[win_combination[1]] == "X" && board[win_combination[2]] == "X") || (board[win_combination[0]] == "O" && board[win_combination[1]] == "O" && board[win_combination[2]] == "O")
-=======
+
 
 def won?(board)
   WIN_COMBINATIONS.each do |win_combo| # win_combo is same as WIN_COMBINATIONS[0][1][2]
@@ -122,24 +117,19 @@ def full?(arr)
 end
 end
 
->>>>>>> 61277ec74bab337f16ace1efc39fba4504117aca
-
 def draw?(arr)
   !won?(arr) && full?(arr)
 end
 
-<<<<<<< HEAD
 def draw?(board)
   !won?(board) && full?(board)
 end
 
 def over?(board)
   won?(board) || draw?(board)
-=======
 
 def over?(game)
   won?(game) || draw?(game)
->>>>>>> 61277ec74bab337f16ace1efc39fba4504117aca
 end
 
 
@@ -152,7 +142,6 @@ def winner(board)
   end
 end
 
-<<<<<<< HEAD
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
@@ -176,7 +165,6 @@ def play(board)
   elsif draw?(board)
     puts "Cat's Game!"
   end
-=======
 
 def play(board)
   puts ('Welcome to Tic Tac Toe!')
@@ -190,17 +178,3 @@ def play(board)
   puts("Cat's Game!")
 end
 end
-
-#play(board)
-
-
-=begin
-until the game is over
-  take turns
->>>>>>> 61277ec74bab337f16ace1efc39fba4504117aca
-end
-if the game was won
-  congratulate the winner
-else if the game was a draw
-  tell the players it has been a draw
-=end
