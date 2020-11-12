@@ -21,24 +21,24 @@ end
 def input_to_index(input)
   input.to_i - 1
   #display_board(board)
-  
+
   def input_to_index(user_input)
     user_input.to_i - 1
   end
-  
-  
+
+
   def move(board, index, current_player)
     board[index] = current_player
   end
-  
+
   def position_taken?(board, position)
     board[position] != "" && board[position] != " "
   end
-  
+
   def valid_move?(board, position)
     !position_taken?(board, position) && position.between?(0, 8)
   end
-  
+
   def turn_count(board)
     a = 0
     board.each do |item|
@@ -47,19 +47,19 @@ def input_to_index(input)
       end
     end
     a
-    
-    
-    
+
+
+
     def position_taken?(board, location)
       board[location] != " " && board[location] != ""
     end
-    
-    
+
+
     def valid_move?(board, index)
       index.between?(0,8) && !position_taken?(board, index)
     end
-    
-    
+
+
     def turn(board)
       puts "Please enter 1-9:"
       input = gets.strip
@@ -71,8 +71,8 @@ def input_to_index(input)
         turn(board)
       end
     end
-    
-    
+
+
     def turn_count(arr)
       counter = 0
       arr.each do |element|
@@ -82,8 +82,8 @@ def input_to_index(input)
       end
       counter
     end
-    
-    
+
+
     def current_player(arr)
       if turn_count(arr) % 2 == 0
         "X"
@@ -91,16 +91,16 @@ def input_to_index(input)
         "O"
       end
     end
-    
+
     def full?(board)
       !board.include? " "
     end
-    
+
     def won?(board)
       WIN_COMBINATIONS.each do |win_combination|
         if (board[win_combination[0]] == "X" && board[win_combination[1]] == "X" && board[win_combination[2]] == "X") || (board[win_combination[0]] == "O" && board[win_combination[1]] == "O" && board[win_combination[2]] == "O")
-          
-          
+
+
           def won?(board)
             WIN_COMBINATIONS.each do |win_combo| # win_combo is same as WIN_COMBINATIONS[0][1][2]
               if (board[win_combo[0]] == "X" && board[win_combo[1]] == "X" && board[win_combo[2]]== "X") || (board[win_combo[0]] == "O" && board[win_combo[1]] == "O" && board[win_combo[2]] == "O")
@@ -109,30 +109,30 @@ def input_to_index(input)
             end
             return false
           end
-          
-          
+
+
           def full?(arr)
             arr.all? do |element|
               element == "X" || element == "O"
             end
           end
-          
+
           def draw?(arr)
             !won?(arr) && full?(arr)
           end
-          
+
           def draw?(board)
             !won?(board) && full?(board)
           end
-          
+
           def over?(board)
             won?(board) || draw?(board)
-            
+
             def over?(game)
               won?(game) || draw?(game)
             end
-            
-            
+
+
             def winner(board)
               # we have game which will be the board array
               # won?(game) will be either false, or an array (for example: [0,1,2])
@@ -141,31 +141,31 @@ def input_to_index(input)
                 board[won?(board)[0]]
               end
             end
-            
+
             def turn(board)
               puts "Please enter 1-9:"
               input = gets.strip
               index = input_to_index(input)
-              
+
               if valid_move?(board, index)
                 move(board, index, current_player(board))
               else
                 turn(board)
               end
             end
-            
+
             def play(board)
               puts "Welcome to Tic Tac Toe!"
               until over?(board)
                 turn(board)
               end
-              
+
               if draw?(board) == false
                 puts "Congratulations #{winner(board)}!"
               elsif draw?(board)
                 puts "Cat's Game!"
               end
-              
+
               def play(board)
                 puts ('Welcome to Tic Tac Toe!')
                 until over?(board)
