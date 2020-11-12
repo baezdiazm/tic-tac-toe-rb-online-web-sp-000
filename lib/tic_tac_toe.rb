@@ -96,80 +96,81 @@ def full?(board)
   !board.include? " "
 end
 
-      def won?(board)
-        WIN_COMBINATIONS.each do |win_combo| # win_combo is same as WIN_COMBINATIONS[0][1][2]
-          if (board[win_combo[0]] == "X" && board[win_combo[1]] == "X" && board[win_combo[2]]== "X") || (board[win_combo[0]] == "O" && board[win_combo[1]] == "O" && board[win_combo[2]] == "O")
-            return win_combo
-          end
-        end
-        return false
+def won?(board)
+  WIN_COMBINATIONS.each do |win_combo| # win_combo is same as WIN_COMBINATIONS[0][1][2]
+    if (board[win_combo[0]] == "X" && board[win_combo[1]] == "X" && board[win_combo[2]]== "X") || (board[win_combo[0]] == "O" && board[win_combo[1]] == "O" && board[win_combo[2]] == "O")
+      return win_combo
+    end
+  end
+  return false
+end
+
+
+def full?(arr)
+  arr.all? do |element|
+    element == "X" || element == "O"
+  end
+end
+
+def draw?(arr)
+  !won?(arr) && full?(arr)
+end
+
+def draw?(board)
+  !won?(board) && full?(board)
+end
+
+def over?(board)
+  won?(board) || draw?(board)
+end
+  
+  def over?(game)
+    won?(game) || draw?(game)
+  end
+  
+  
+  def winner(board)
+    # we have game which will be the board array
+    # won?(game) will be either false, or an array (for example: [0,1,2])
+    # we can't grab a value of an index for false
+    if won?(board)
+      board[won?(board)[0]]
+    end
+  end
+  
+  def turn(board)
+    puts "Please enter 1-9:"
+    input = gets.strip
+    index = input_to_index(input)
+    
+    if valid_move?(board, index)
+      move(board, index, current_player(board))
+    else
+      turn(board)
+    end
+  end
+  
+  def play(board)
+    puts "Welcome to Tic Tac Toe!"
+    until over?(board)
+      turn(board)
+    end
+    
+    if draw?(board) == false
+      puts "Congratulations #{winner(board)}!"
+    elsif draw?(board)
+      puts "Cat's Game!"
+    end
+    
+    def play(board)
+      puts ('Welcome to Tic Tac Toe!')
+      until over?(board)
+        turn(board)
       end
-
-
-      def full?(arr)
-        arr.all? do |element|
-          element == "X" || element == "O"
-        end
+      #move(current_player(board), input_to_index())
+      if won?(board)
+        puts("Congratulations #{winner(board)}!")
+      elsif draw?(board)
+        puts("Cat's Game!")
       end
-
-      def draw?(arr)
-        !won?(arr) && full?(arr)
-      end
-
-      def draw?(board)
-        !won?(board) && full?(board)
-      end
-
-      def over?(board)
-        won?(board) || draw?(board)
-
-        def over?(game)
-          won?(game) || draw?(game)
-        end
-
-
-        def winner(board)
-          # we have game which will be the board array
-          # won?(game) will be either false, or an array (for example: [0,1,2])
-          # we can't grab a value of an index for false
-          if won?(board)
-            board[won?(board)[0]]
-          end
-        end
-
-        def turn(board)
-          puts "Please enter 1-9:"
-          input = gets.strip
-          index = input_to_index(input)
-
-          if valid_move?(board, index)
-            move(board, index, current_player(board))
-          else
-            turn(board)
-          end
-        end
-
-        def play(board)
-          puts "Welcome to Tic Tac Toe!"
-          until over?(board)
-            turn(board)
-          end
-
-          if draw?(board) == false
-            puts "Congratulations #{winner(board)}!"
-          elsif draw?(board)
-            puts "Cat's Game!"
-          end
-
-          def play(board)
-            puts ('Welcome to Tic Tac Toe!')
-            until over?(board)
-              turn(board)
-            end
-            #move(current_player(board), input_to_index())
-            if won?(board)
-              puts("Congratulations #{winner(board)}!")
-            elsif draw?(board)
-              puts("Cat's Game!")
-            end
-          end
+    end
