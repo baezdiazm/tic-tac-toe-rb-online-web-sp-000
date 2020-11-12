@@ -124,53 +124,41 @@ def over?(board)
   won?(board) || draw?(board)
 end
 
-  def over?(game)
-    won?(game) || draw?(game)
+def over?(game)
+  won?(game) || draw?(game)
+end
+
+
+def winner(board)
+  # we have game which will be the board array
+  # won?(game) will be either false, or an array (for example: [0,1,2])
+  # we can't grab a value of an index for false
+  if won?(board)
+    board[won?(board)[0]]
   end
+end
 
-
-  def winner(board)
-    # we have game which will be the board array
-    # won?(game) will be either false, or an array (for example: [0,1,2])
-    # we can't grab a value of an index for false
-    if won?(board)
-      board[won?(board)[0]]
-    end
+def turn(board)
+  puts "Please enter 1-9:"
+  input = gets.strip
+  index = input_to_index(input)
+  
+  if valid_move?(board, index)
+    move(board, index, current_player(board))
+  else
+    turn(board)
   end
+end
 
-  def turn(board)
-    puts "Please enter 1-9:"
-    input = gets.strip
-    index = input_to_index(input)
-
-    if valid_move?(board, index)
-      move(board, index, current_player(board))
-    else
-      turn(board)
-    end
+def play(board)
+  puts "Welcome to Tic Tac Toe!"
+  until over?(board)
+    turn(board)
   end
-
-  def play(board)
-    puts "Welcome to Tic Tac Toe!"
-    until over?(board)
-      turn(board)
-    end
-
-    if draw?(board) == false
-      puts "Congratulations #{winner(board)}!"
-    elsif draw?(board)
-      puts "Cat's Game!"
-    end
-
-    def play(board)
-      puts ('Welcome to Tic Tac Toe!')
-      until over?(board)
-        turn(board)
-      end
-      #move(current_player(board), input_to_index())
-      if won?(board)
-        puts("Congratulations #{winner(board)}!")
-      elsif draw?(board)
-        puts("Cat's Game!")
-      end
-    end
+  
+  if draw?(board) == false
+    puts "Congratulations #{winner(board)}!"
+  elsif draw?(board)
+    puts "Cat's Game!"
+  end
+end
